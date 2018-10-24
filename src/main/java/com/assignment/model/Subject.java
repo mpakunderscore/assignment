@@ -11,12 +11,15 @@ public class Subject {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
+    private Specialty specialty;
+
     private String title;
 
     public Subject() {
     }
 
-    public Subject(String title) {
+    public Subject(Specialty specialty, String title) {
+        this.specialty = specialty;
         this.title = title;
     }
 }
