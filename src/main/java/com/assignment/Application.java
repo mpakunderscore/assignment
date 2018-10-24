@@ -17,14 +17,19 @@ public class Application {
 
         //Specialty
         SpecialtyDAO specialtyDAO = context.getBean(SpecialtyDAO.class);
-        Specialty specialty = new Specialty("Algebra");
-        specialtyDAO.save(specialty);
+        Specialty specialtyOne = new Specialty("Algebra");
+        specialtyDAO.save(specialtyOne);
+        Specialty specialtyTwo = new Specialty("Physics");
+        specialtyDAO.save(specialtyTwo);
 
         //Teacher
         TeacherDAO teacherDAO = context.getBean(TeacherDAO.class);
-        Teacher teacher = new Teacher("Lucky", "Teacher", specialty);
-        teacherDAO.save(teacher);
-        System.out.println(teacherDAO.get(teacher.getId()));
+        Teacher teacherOne = new Teacher("Lucky", "Teacher1", specialtyOne);
+        teacherDAO.save(teacherOne);
+        Teacher teacherTwo = new Teacher("Some", "Teacher2", specialtyTwo);
+        teacherDAO.save(teacherTwo);
+
+        System.out.println(teacherDAO.get(teacherOne.getId()));
 
 
         //Student
@@ -49,15 +54,15 @@ public class Application {
 
         //Subject
         SubjectDAO subjectDAO = context.getBean(SubjectDAO.class);
-        Subject subjectOne = new Subject(specialty, "Algebra I");
+        Subject subjectOne = new Subject(specialtyOne, "Algebra I");
         subjectDAO.save(subjectOne);
-        Subject subjectTwo = new Subject(specialty, "Algebra II");
+        Subject subjectTwo = new Subject(specialtyOne, "Algebra II");
         subjectDAO.save(subjectTwo);
 
 
         //Group
         GroupDAO groupDAO = context.getBean(GroupDAO.class);
-        Group group = new Group(teacher, subjectOne);
+        Group group = new Group(teacherOne, subjectOne);
         group.addStudent(studentOne);
         group.addStudent(studentTwo);
 //        groupDAO.save(group);

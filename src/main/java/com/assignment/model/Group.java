@@ -1,6 +1,8 @@
 package com.assignment.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="GROUP")
@@ -69,9 +71,12 @@ public class Group {
         this.teacher = teacher;
     }
 
-    //    private Set<Student> students;
+    @ManyToMany(mappedBy = "groups")
+    private Set<Student> students = new HashSet<Student>();
 
     public void addStudent(Student student) {
+
+        students.add(student);
     }
 
     @Override
