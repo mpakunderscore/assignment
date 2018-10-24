@@ -29,7 +29,8 @@ public class Application {
         Teacher teacherTwo = new Teacher("Some", "Teacher2", specialtyTwo);
         teacherDAO.save(teacherTwo);
 
-        System.out.println(teacherDAO.get(teacherOne.getId()));
+//        teacherDAO.get(teacherOne.getId());
+//        System.out.println();
 
 
         //Student
@@ -38,7 +39,8 @@ public class Application {
         studentDAO.save(studentOne);
         Student studentTwo = new Student("Vik", "Budharja");
         studentDAO.save(studentTwo);
-        studentDAO.save(new Student("Catherine", "Brown"));
+        Student studentThree = new Student("Catherine", "Brown");
+        studentDAO.save(studentThree);
 
         Student studentDelete = new Student("Unlucky", "Dude");
         studentDAO.save(studentDelete);
@@ -65,7 +67,8 @@ public class Application {
         Group group = new Group(teacherOne, subjectOne);
         group.addStudent(studentOne);
         group.addStudent(studentTwo);
-//        groupDAO.save(group);
+        group.addStudent(studentThree);
+        groupDAO.save(group);
 
 
         SpringApplication.run(Application.class, args);

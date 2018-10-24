@@ -1,7 +1,5 @@
 package com.assignment.model;
 
-import com.assignment.Application;
-import com.assignment.dao.SpecialtyDAO;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -59,11 +57,6 @@ public class Teacher {
     }
 
     public Specialty getSpecialty() {
-
-        //TODO
-        SpecialtyDAO specialtyDAO = Application.context.getBean(SpecialtyDAO.class);
-        specialty = specialtyDAO.get(specialty.getId());
-
         return specialty;
     }
 
@@ -74,15 +67,11 @@ public class Teacher {
     @Override
     public String toString() {
 
-        //TODO
-        SpecialtyDAO specialtyDAO = Application.context.getBean(SpecialtyDAO.class);
-        specialty = specialtyDAO.get(specialty.getId());
-
         return "Teacher{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", specialty=" + specialty.toString() +
+                ", specialty=" + specialty +
                 '}';
     }
 }

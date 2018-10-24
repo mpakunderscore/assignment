@@ -1,10 +1,13 @@
 package com.assignment.dao;
 
+import com.assignment.Application;
+import com.assignment.model.Group;
 import com.assignment.model.Student;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import java.util.HashSet;
 import java.util.List;
 
 public class StudentDAOImpl implements StudentDAO {
@@ -35,6 +38,11 @@ public class StudentDAOImpl implements StudentDAO {
         Session session = this.sessionFactory.openSession();
         Student student = session.get(Student.class, id);
         session.close();
+
+        //TODO
+//        GroupDAO groupDAO = Application.context.getBean(GroupDAO.class);
+        student.setGroups(new HashSet<Group>());
+
         return student;
     }
 
@@ -42,6 +50,13 @@ public class StudentDAOImpl implements StudentDAO {
 		Session session = this.sessionFactory.openSession();
 		List<Student> list = session.createQuery("from Student").list();
 		session.close();
-		return list;
+
+		//TODO
+//        GroupDAO groupDAO = Application.context.getBean(GroupDAO.class);
+		for (Student s : list) {
+		    s.setGroups(new HashSet<Group>());
+        }
+
+        return list;
 	}
 }

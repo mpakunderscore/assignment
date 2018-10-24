@@ -1,5 +1,6 @@
 package com.assignment.dao;
 
+import com.assignment.Application;
 import com.assignment.model.Subject;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -33,15 +34,26 @@ public class SubjectDAOImpl implements SubjectDAO {
 
     public Subject get(int id) {
         Session session = this.sessionFactory.openSession();
-        Subject Subject = session.get(Subject.class, id);
+        Subject subject = session.get(Subject.class, id);
         session.close();
-        return Subject;
+
+        SpecialtyDAO specialtyDAO = Application.context.getBean(SpecialtyDAO.class);
+        subject.setSpecialty(specialtyDAO.get(subject.getSpecialty().getId()));
+
+        return subject;
     }
 
     public List<Subject> list() {
         Session session = this.sessionFactory.openSession();
         List<Subject> list = session.createQuery("from Subject").list();
         session.close();
+
+        SpecialtyDAO specialtyDAO = Application.context.getBean(SpecialtyDAO.class);
+        for (Subject s : list) {
+            s.setSpecialty(specialtyDAO.get(s.getSpecialty().getId()));
+        }
+
+
         return list;
     }
 }

@@ -1,5 +1,6 @@
 package com.assignment.dao;
 
+import com.assignment.Application;
 import com.assignment.model.Teacher;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -33,15 +34,27 @@ public class TeacherDAOImpl implements TeacherDAO {
 
     public Teacher get(int id) {
         Session session = this.sessionFactory.openSession();
-        Teacher Teacher = session.get(Teacher.class, id);
+        Teacher teacher = session.get(Teacher.class, id);
         session.close();
-        return Teacher;
+
+        //TODO
+        SpecialtyDAO specialtyDAO = Application.context.getBean(SpecialtyDAO.class);
+        teacher.setSpecialty(specialtyDAO.get(teacher.getSpecialty().getId()));
+
+        return teacher;
     }
 
     public List<Teacher> list() {
         Session session = this.sessionFactory.openSession();
         List<Teacher> list = session.createQuery("from Teacher").list();
         session.close();
+
+        //TODO
+        SpecialtyDAO specialtyDAO = Application.context.getBean(SpecialtyDAO.class);
+        for (Teacher t : list) {
+            t.setSpecialty(specialtyDAO.get(t.getSpecialty().getId()));
+        }
+
         return list;
     }
 }

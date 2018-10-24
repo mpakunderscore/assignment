@@ -39,6 +39,7 @@ public class Specialty {
 //    @OneToMany(mappedBy="SPECIALTY")
 //    private Set<Teacher> teachers;
 
+
     @Override
     public String toString() {
         return "Specialty{" +

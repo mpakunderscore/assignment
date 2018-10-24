@@ -34,30 +34,21 @@ public class MainController {
     }
 
     @RequestMapping("/teacher/get")
-    public String getTeacher(@RequestParam(value="id", defaultValue="") int id) {
+    public Teacher getTeacher(@RequestParam(value="id", defaultValue="") int id) {
 
         TeacherDAO teacherDAO = Application.context.getBean(TeacherDAO.class);
         Teacher teacher = teacherDAO.get(id);
 
-        return teacher.toString();
+        return teacher;
     }
 
     @RequestMapping("/teachers")
-    public String getTeachersList() {
+    public List<Teacher> getTeachersList() {
 
         TeacherDAO teacherDAO = Application.context.getBean(TeacherDAO.class);
         List<Teacher> teachers = teacherDAO.list();
 
-
-        //TODO
-        String listString = "";
-        for (Teacher s : teachers) {
-            listString += s.toString() + "\t";
-        }
-
-//        System.out.println(listString);
-
-        return listString;
+        return teachers;
     }
 
     @RequestMapping("/subject/get")

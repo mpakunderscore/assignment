@@ -17,14 +17,6 @@ public class Student {
 
     private String lastName;
 
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-            name = "STUDENT_GROUP",
-            joinColumns = { @JoinColumn(name = "STUDENT_ID") },
-            inverseJoinColumns = { @JoinColumn(name = "GROUP_ID") }
-    )
-    Set<Group> groups = new HashSet<Group>();
-
     public Student() {
     }
 
@@ -57,12 +49,31 @@ public class Student {
         this.lastName = lastName;
     }
 
+
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "STUDENT_GROUPING",
+            joinColumns = { @JoinColumn(name = "STUDENT_ID") },
+            inverseJoinColumns = { @JoinColumn(name = "GROUPING_ID") }
+    )
+    private Set<Group> groups = new HashSet<Group>(0);
+
+    public Set<Group> getGroups() {
+        return this.groups;
+    }
+
+    public void setGroups(Set<Group> groups) {
+        this.groups = groups;
+    }
+
+
     @Override
     public String toString() {
         return "Student{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", groups=" + groups +
                 '}';
     }
 }

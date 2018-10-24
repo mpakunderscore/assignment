@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name="GROUP")
+@Table(name="GROUPING")
 public class Group {
 
     @Id
@@ -71,13 +71,22 @@ public class Group {
         this.teacher = teacher;
     }
 
-    @ManyToMany(mappedBy = "groups")
-    private Set<Student> students = new HashSet<Student>();
+
+    @ManyToMany(mappedBy = "GROUPINGS")
+    private Set<Student> students = new HashSet<Student>(0);
+
+    public Set<Student> getStudents() {
+        return this.students;
+    }
+
+    public void setStudents(Set<Student> students) {
+        this.students = students;
+    }
 
     public void addStudent(Student student) {
-
-        students.add(student);
+        this.students.add(student);
     }
+
 
     @Override
     public String toString() {
@@ -86,6 +95,7 @@ public class Group {
                 ", specialty=" + specialty +
                 ", subject=" + subject +
                 ", teacher=" + teacher +
+                ", students=" + students +
                 '}';
     }
 }
