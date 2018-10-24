@@ -59,6 +59,11 @@ public class Teacher {
     }
 
     public Specialty getSpecialty() {
+
+        //TODO
+        SpecialtyDAO specialtyDAO = Application.context.getBean(SpecialtyDAO.class);
+        specialty = specialtyDAO.get(specialty.getId());
+
         return specialty;
     }
 

@@ -13,6 +13,13 @@ public class Specialty {
 
     private String title;
 
+    public Specialty() {
+    }
+
+    public Specialty(String title) {
+        this.title = title;
+    }
+
     public int getId() {
         return id;
     }
@@ -31,13 +38,6 @@ public class Specialty {
 
 //    @OneToMany(mappedBy="SPECIALTY")
 //    private Set<Teacher> teachers;
-
-    public Specialty() {
-    }
-
-    public Specialty(String title) {
-        this.title = title;
-    }
 
     @Override
     public String toString() {

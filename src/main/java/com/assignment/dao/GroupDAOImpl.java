@@ -15,18 +15,18 @@ public class GroupDAOImpl implements GroupDAO {
         this.sessionFactory = sessionFactory;
     }
 
-    public void save(Group s) {
+    public void save(Group g) {
         Session session = this.sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
-        session.persist(s);
+        session.persist(g);
         tx.commit();
         session.close();
     }
 
-    public void delete(Group s) {
+    public void delete(Group g) {
         Session session = this.sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
-        session.delete(s);
+        session.delete(g);
         tx.commit();
         session.close();
     }

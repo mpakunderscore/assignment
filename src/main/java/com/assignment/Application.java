@@ -63,8 +63,6 @@ public class Application {
         groupDAO.save(group);
 
 
-
-
         SpringApplication.run(Application.class, args);
     }
 }
