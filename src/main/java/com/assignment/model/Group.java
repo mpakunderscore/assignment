@@ -73,20 +73,19 @@ public class Group {
 
 
     @ManyToMany(mappedBy = "groups")
-    private Set<Student> students = new HashSet<Student>(0);
+    private Set<Student> students = new HashSet<Student>();
 
     public Set<Student> getStudents() {
-        return this.students;
+        return students;
     }
 
     public void setStudents(Set<Student> students) {
         this.students = students;
-    }
 
-    public void addStudent(Student student) {
-        this.students.add(student);
+//        for (Student student : students) {
+//            student.getGroups().add(this);
+//        }
     }
-
 
     @Override
     public String toString() {

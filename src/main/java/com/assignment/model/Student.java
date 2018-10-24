@@ -56,7 +56,7 @@ public class Student {
             joinColumns = { @JoinColumn(name = "STUDENT_ID") },
             inverseJoinColumns = { @JoinColumn(name = "GROUPING_ID") }
     )
-    private Set<Group> groups = new HashSet<Group>(0);
+    private Set<Group> groups = new HashSet<Group>();
 
     public Set<Group> getGroups() {
         return this.groups;

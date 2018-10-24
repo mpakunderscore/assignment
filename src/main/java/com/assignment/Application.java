@@ -6,7 +6,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @SpringBootApplication
 public class Application {
@@ -65,10 +67,16 @@ public class Application {
         //Group
         GroupDAO groupDAO = context.getBean(GroupDAO.class);
         Group group = new Group(teacherOne, subjectOne);
-        group.addStudent(studentOne);
-        group.addStudent(studentTwo);
-        group.addStudent(studentThree);
+
+        Set<Student> studentSet = new HashSet<Student>();
+        studentSet.add(studentOne);
+        studentSet.add(studentTwo);
+        studentSet.add(studentThree);
+
+        group.setStudents(studentSet);
         groupDAO.save(group);
+
+        System.out.println(groupDAO.get(1));
 
 
         SpringApplication.run(Application.class, args);

@@ -50,7 +50,6 @@ public class GroupDAOImpl implements GroupDAO {
 
         StudentDAO studentDAO = Application.context.getBean(StudentDAO.class);
 
-//        Hibernate.initialize(group.getStudents());
         for (Student s : group.getStudents()) {
             s = studentDAO.get(s.getId());
         }
@@ -84,7 +83,6 @@ public class GroupDAOImpl implements GroupDAO {
             group.setSubject(subjectDAO.get(group.getSubject().getId()));
             group.setTeacher(teacherDAO.get(group.getTeacher().getId()));
 
-//            Hibernate.initialize(group.getStudents());
             for (Student s : group.getStudents()) {
                 s = studentDAO.get(s.getId());
             }
