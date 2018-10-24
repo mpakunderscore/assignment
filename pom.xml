@@ -30,6 +30,8 @@
         <tomcat.version>9.0.1</tomcat.version>
         <h2database.version>1.4.196</h2database.version>
 
+        <property name="current_session_context_class">thread</property>
+
     </properties>
 
     <parent>

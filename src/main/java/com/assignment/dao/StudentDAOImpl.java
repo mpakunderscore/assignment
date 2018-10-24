@@ -40,9 +40,8 @@ public class StudentDAOImpl implements StudentDAO {
 
 	public List<Student> list() {
 		Session session = this.sessionFactory.openSession();
-		List<Student> personList = session.createQuery("from Student").list();
+		List<Student> list = session.createQuery("from Student").list();
 		session.close();
-		return personList;
+		return list;
 	}
-
 }

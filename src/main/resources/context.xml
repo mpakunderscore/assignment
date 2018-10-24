@@ -25,7 +25,19 @@
         </property>
     </bean>
 
-    <bean id="personDAO" class="com.assignment.dao.StudentDAOImpl">
+    <bean id="studentDAO" class="com.assignment.dao.StudentDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
+    <bean id="teacherDAO" class="com.assignment.dao.TeacherDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
+    <bean id="specialtyDAO" class="com.assignment.dao.SpecialtyDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
+    <bean id="subjectDAO" class="com.assignment.dao.SubjectDAOImpl">
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
 
