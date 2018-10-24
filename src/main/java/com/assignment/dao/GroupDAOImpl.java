@@ -3,6 +3,7 @@ package com.assignment.dao;
 import com.assignment.Application;
 import com.assignment.model.Group;
 import com.assignment.model.Student;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -36,7 +37,7 @@ public class GroupDAOImpl implements GroupDAO {
     public Group get(int id) {
         Session session = this.sessionFactory.openSession();
         Group group = session.get(Group.class, id);
-        session.close();
+
 
         SpecialtyDAO specialtyDAO = Application.context.getBean(SpecialtyDAO.class);
         group.setSpecialty(specialtyDAO.get(group.getSpecialty().getId()));
@@ -48,9 +49,13 @@ public class GroupDAOImpl implements GroupDAO {
         group.setTeacher(teacherDAO.get(group.getTeacher().getId()));
 
         StudentDAO studentDAO = Application.context.getBean(StudentDAO.class);
+
+//        Hibernate.initialize(group.getStudents());
         for (Student s : group.getStudents()) {
             s = studentDAO.get(s.getId());
         }
+
+        session.close();
 
         return group;
     }
@@ -66,7 +71,27 @@ public class GroupDAOImpl implements GroupDAO {
     public List<Group> listFull() {
         Session session = this.sessionFactory.openSession();
         List<Group> list = session.createQuery("from Group").list();
+
+
+        SpecialtyDAO specialtyDAO = Application.context.getBean(SpecialtyDAO.class);
+        SubjectDAO subjectDAO = Application.context.getBean(SubjectDAO.class);
+        TeacherDAO teacherDAO = Application.context.getBean(TeacherDAO.class);
+        StudentDAO studentDAO = Application.context.getBean(StudentDAO.class);
+
+        for (Group group : list) {
+
+            group.setSpecialty(specialtyDAO.get(group.getSpecialty().getId()));
+            group.setSubject(subjectDAO.get(group.getSubject().getId()));
+            group.setTeacher(teacherDAO.get(group.getTeacher().getId()));
+
+//            Hibernate.initialize(group.getStudents());
+            for (Student s : group.getStudents()) {
+                s = studentDAO.get(s.getId());
+            }
+        }
+
         session.close();
+
         return list;
     }
 }

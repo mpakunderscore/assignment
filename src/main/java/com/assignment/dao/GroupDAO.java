@@ -13,4 +13,6 @@ public interface GroupDAO {
     public Group get(int id);
 
     public List list();
+
+    public List listFull();
 }

@@ -72,7 +72,7 @@ public class Group {
     }
 
 
-    @ManyToMany(mappedBy = "GROUPINGS")
+    @ManyToMany(mappedBy = "groups")
     private Set<Student> students = new HashSet<Student>(0);
 
     public Set<Student> getStudents() {

@@ -100,7 +100,7 @@ public class MainController {
     public List<Group> getGroupsList() {
 
         GroupDAO groupDAO = Application.context.getBean(GroupDAO.class);
-        List<Group> groups = groupDAO.list();
+        List<Group> groups = groupDAO.listFull();
 
         return groups;
     }
