@@ -1,10 +1,8 @@
 package com.assignment.controllers;
 
 import com.assignment.Application;
-import com.assignment.dao.StudentDAO;
-import com.assignment.dao.TeacherDAO;
-import com.assignment.model.Student;
-import com.assignment.model.Teacher;
+import com.assignment.dao.*;
+import com.assignment.model.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -50,6 +48,8 @@ public class MainController {
         TeacherDAO teacherDAO = Application.context.getBean(TeacherDAO.class);
         List<Teacher> teachers = teacherDAO.list();
 
+
+        //TODO
         String listString = "";
         for (Teacher s : teachers) {
             listString += s.toString() + "\t";
@@ -58,5 +58,59 @@ public class MainController {
 //        System.out.println(listString);
 
         return listString;
+    }
+
+    @RequestMapping("/subject/get")
+    public Subject getSubject(@RequestParam(value="id", defaultValue="") int id) {
+
+        SubjectDAO subjectDAO = Application.context.getBean(SubjectDAO.class);
+        Subject subject = subjectDAO.get(id);
+
+        return subject;
+    }
+
+    @RequestMapping("/subjects")
+    public List<Subject> getSubjectsList() {
+
+        SubjectDAO subjectDAO = Application.context.getBean(SubjectDAO.class);
+        List<Subject> subjects = subjectDAO.list();
+
+        return subjects;
+    }
+
+    @RequestMapping("/specialty/get")
+    public Specialty getSpecialty(@RequestParam(value="id", defaultValue="") int id) {
+
+        SpecialtyDAO specialtyDAO = Application.context.getBean(SpecialtyDAO.class);
+        Specialty subject = specialtyDAO.get(id);
+
+        return subject;
+    }
+
+    @RequestMapping("/specialty")
+    public List<Specialty> getSpecialtyList() {
+
+        SpecialtyDAO specialtyDAO = Application.context.getBean(SpecialtyDAO.class);
+        List<Specialty> specialty = specialtyDAO.list();
+
+        return specialty;
+    }
+
+    @RequestMapping("/group/get")
+    public Group getGroup(@RequestParam(value="id", defaultValue="") int id) {
+
+        GroupDAO groupDAO = Application.context.getBean(GroupDAO.class);
+        Group group = groupDAO.get(id);
+
+        return group;
+    }
+
+    @RequestMapping("/groups")
+    public List<Group> getGroupsList() {
+
+        GroupDAO groupDAO = Application.context.getBean(GroupDAO.class);
+        List<Group> groups = groupDAO.list();
+
+        return groups;
     }
 }

@@ -60,7 +60,7 @@ public class Application {
         Group group = new Group(teacher, subjectOne);
         group.addStudent(studentOne);
         group.addStudent(studentTwo);
-        groupDAO.save(group);
+//        groupDAO.save(group);
 
 
         SpringApplication.run(Application.class, args);
